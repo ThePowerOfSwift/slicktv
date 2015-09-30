@@ -14,13 +14,14 @@ class ViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var textURL: UITextField!
     @IBOutlet weak var webView: UIWebView!
     var link = ""
-    var moviePlayer:MPMoviePlayerController!
-    
+    let player:MPMoviePlayerController = MPMoviePlayerController()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         webView!.delegate = self
         loadLink("https://google.com")
         textURL.text = "http://vodlocker.com/vzxb56qffdf4"
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
     }
 
 //    link must be fully formatted with 'http://'
@@ -33,17 +34,15 @@ class ViewController: UIViewController, UIWebViewDelegate {
     func loadVideo(link: String){
         var url = NSURL(string: link)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
-
-        moviePlayer = MPMoviePlayerController(contentURL: url)
-        moviePlayer.view.frame = self.webView.bounds
+        player.view.frame = self.view.bounds
+        self.view.addSubview(player.view)
         
-        self.view.addSubview(moviePlayer.view)
-        moviePlayer.fullscreen = true
-        moviePlayer.movieSourceType = MPMovieSourceType.Streaming
-        moviePlayer.controlStyle = MPMovieControlStyle.Fullscreen
-        moviePlayer.prepareToPlay()
-        moviePlayer.play()
+        player.movieSourceType = MPMovieSourceType.Streaming
+        player.controlStyle = MPMovieControlStyle.Fullscreen
+        player.scalingMode = MPMovieScalingMode.AspectFill
+        player.contentURL = url!
+        player.prepareToPlay()
+        player.play()
     }
     
     func matchesForRegexInText(regex: String!, text: String!) -> [String] {
@@ -62,7 +61,8 @@ class ViewController: UIViewController, UIWebViewDelegate {
     }
     
     func doneButtonClick(sender:NSNotification?){
-        moviePlayer.stop()
+        player.stop()
+        player.view.removeFromSuperview()
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
