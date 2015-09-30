@@ -74,6 +74,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
         if link == "" && matchesVodlocker != [] && matchesVodlocker[0] != "" {
             link = dropFirst(matchesVodlocker[0])
             loadVideo(link)
+            link = ""
         }
 
 //        var matchesAllMyVideos = matchesForRegexInText("\"file\" : \"(.+v2)", text: dom)
