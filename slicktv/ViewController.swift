@@ -14,13 +14,13 @@ class ViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var textURL: UITextField!
     @IBOutlet weak var webView: UIWebView!
     var link = ""
-
+    var moviePlayer:MPMoviePlayerController!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         webView!.delegate = self
         loadLink("https://google.com")
         textURL.text = "http://vodlocker.com/vzxb56qffdf4"
-//        textURL.text = "http://stanleychiang.com/video/prog_index.m3u8"
     }
 
 //    link must be fully formatted with 'http://'
@@ -32,7 +32,9 @@ class ViewController: UIViewController, UIWebViewDelegate {
 
     func loadVideo(link: String){
         var url = NSURL(string: link)
-        var moviePlayer:MPMoviePlayerController!
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
+
         moviePlayer = MPMoviePlayerController(contentURL: url)
         moviePlayer.view.frame = self.webView.bounds
         
@@ -42,7 +44,6 @@ class ViewController: UIViewController, UIWebViewDelegate {
         moviePlayer.controlStyle = MPMovieControlStyle.Fullscreen
         moviePlayer.prepareToPlay()
         moviePlayer.play()
-
     }
     
     func matchesForRegexInText(regex: String!, text: String!) -> [String] {
@@ -59,7 +60,11 @@ class ViewController: UIViewController, UIWebViewDelegate {
         loadLink(textURL.text)
         textURL.resignFirstResponder()
     }
-
+    
+    func doneButtonClick(sender:NSNotification?){
+        moviePlayer.stop()
+    }
+    
     func webViewDidFinishLoad(webView: UIWebView) {
         var dom = webView.stringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML")!
         
