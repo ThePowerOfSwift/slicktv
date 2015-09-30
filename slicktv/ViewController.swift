@@ -7,18 +7,20 @@
 //
 
 import UIKit
+import MediaPlayer
 
 class ViewController: UIViewController, UIWebViewDelegate {
 
     @IBOutlet weak var textURL: UITextField!
     @IBOutlet weak var webView: UIWebView!
-    
+    var link = ""
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         webView!.delegate = self
         loadLink("https://google.com")
-//        textURL.text = "http://vodlocker.com/vzxb56qffdf4"
+        textURL.text = "http://vodlocker.com/vzxb56qffdf4"
+//        textURL.text = "http://stanleychiang.com/video/prog_index.m3u8"
     }
 
 //    link must be fully formatted with 'http://'
@@ -27,10 +29,52 @@ class ViewController: UIViewController, UIWebViewDelegate {
         var request = NSURLRequest(URL: url!)
         webView!.loadRequest(request)
     }
+
+    func loadVideo(link: String){
+        var url = NSURL(string: link)
+        var moviePlayer:MPMoviePlayerController!
+        moviePlayer = MPMoviePlayerController(contentURL: url)
+        moviePlayer.view.frame = self.webView.bounds
+        
+        self.view.addSubview(moviePlayer.view)
+        moviePlayer.fullscreen = true
+        moviePlayer.movieSourceType = MPMovieSourceType.Streaming
+        moviePlayer.controlStyle = MPMovieControlStyle.Fullscreen
+        moviePlayer.prepareToPlay()
+        moviePlayer.play()
+
+    }
+    
+    func matchesForRegexInText(regex: String!, text: String!) -> [String] {
+        let regex = NSRegularExpression(pattern: regex,
+            options: nil, error: nil)!
+        let nsString = text as NSString
+        let results = regex.matchesInString(text,
+            options: nil, range: NSMakeRange(0, nsString.length))
+            as! [NSTextCheckingResult]
+        return map(results) { nsString.substringWithRange($0.range)}
+    }
     
     @IBAction func goButtonPressed(sender: UIButton) {
         loadLink(textURL.text)
         textURL.resignFirstResponder()
+    }
+
+    func webViewDidFinishLoad(webView: UIWebView) {
+        var dom = webView.stringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML")!
+        
+        var matchesVodlocker = matchesForRegexInText("\"(.+v\\.mp4)", text: dom)
+        if link == "" && matchesVodlocker != [] && matchesVodlocker[0] != "" {
+            link = dropFirst(matchesVodlocker[0])
+            loadVideo(link)
+        }
+
+//        var matchesAllMyVideos = matchesForRegexInText("\"file\" : \"(.+v2)", text: dom)
+//        if link == "" && matchesAllMyVideos != [] && matchesAllMyVideos[0] != "" {
+//            link = dropFirst(matchesAllMyVideos[0])
+//            self.performSegueWithIdentifier("foundLink", sender: self)
+//        }
+
     }
 
 }
