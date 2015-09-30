@@ -36,7 +36,9 @@ class ViewController: UIViewController, UIWebViewDelegate {
         
         player.view.frame = self.view.bounds
         self.view.addSubview(player.view)
-        
+
+//this allows us to switch orientations during the video but breaks video dismissing functionality
+//        player.fullscreen = true
         player.movieSourceType = MPMovieSourceType.Streaming
         player.controlStyle = MPMovieControlStyle.Fullscreen
         player.scalingMode = MPMovieScalingMode.AspectFill
