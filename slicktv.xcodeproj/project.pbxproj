@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		F627F16D1BBB9E2F00273C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F627F16C1BBB9E2F00273C58 /* AppDelegate.swift */; };
+		F627F1701BBB9E2F00273C58 /* slicktv.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F627F16E1BBB9E2F00273C58 /* slicktv.xcdatamodeld */; };
+		F627F1721BBB9E2F00273C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F627F1711BBB9E2F00273C58 /* ViewController.swift */; };
+		F627F1751BBB9E2F00273C58 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F627F1731BBB9E2F00273C58 /* Main.storyboard */; };
+		F627F1771BBB9E2F00273C58 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F627F1761BBB9E2F00273C58 /* Images.xcassets */; };
+		F627F17A1BBB9E2F00273C58 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F627F1781BBB9E2F00273C58 /* LaunchScreen.xib */; };
+		F627F1861BBB9E2F00273C58 /* slicktvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F627F1851BBB9E2F00273C58 /* slicktvTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F627F1801BBB9E2F00273C58 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F627F15F1BBB9E2F00273C58 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F627F1661BBB9E2F00273C58;
+			remoteInfo = slicktv;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		F627F1671BBB9E2F00273C58 /* slicktv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slicktv.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F627F16B1BBB9E2F00273C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F627F16C1BBB9E2F00273C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F627F16F1BBB9E2F00273C58 /* slicktv.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = slicktv.xcdatamodel; sourceTree = "<group>"; };
+		F627F1711BBB9E2F00273C58 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F627F1741BBB9E2F00273C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F627F1761BBB9E2F00273C58 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F627F1791BBB9E2F00273C58 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F627F17F1BBB9E2F00273C58 /* slicktvTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slicktvTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F627F1841BBB9E2F00273C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F627F1851BBB9E2F00273C58 /* slicktvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slicktvTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F627F1641BBB9E2F00273C58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F627F17C1BBB9E2F00273C58 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		F627F15E1BBB9E2F00273C58 = {
+			isa = PBXGroup;
+			children = (
+				F627F1691BBB9E2F00273C58 /* slicktv */,
+				F627F1821BBB9E2F00273C58 /* slicktvTests */,
+				F627F1681BBB9E2F00273C58 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		F627F1681BBB9E2F00273C58 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F627F1671BBB9E2F00273C58 /* slicktv.app */,
+				F627F17F1BBB9E2F00273C58 /* slicktvTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F627F1691BBB9E2F00273C58 /* slicktv */ = {
+			isa = PBXGroup;
+			children = (
+				F627F16C1BBB9E2F00273C58 /* AppDelegate.swift */,
+				F627F1711BBB9E2F00273C58 /* ViewController.swift */,
+				F627F1731BBB9E2F00273C58 /* Main.storyboard */,
+				F627F1761BBB9E2F00273C58 /* Images.xcassets */,
+				F627F1781BBB9E2F00273C58 /* LaunchScreen.xib */,
+				F627F16E1BBB9E2F00273C58 /* slicktv.xcdatamodeld */,
+				F627F16A1BBB9E2F00273C58 /* Supporting Files */,
+			);
+			path = slicktv;
+			sourceTree = "<group>";
+		};
+		F627F16A1BBB9E2F00273C58 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F627F16B1BBB9E2F00273C58 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F627F1821BBB9E2F00273C58 /* slicktvTests */ = {
+			isa = PBXGroup;
+			children = (
+				F627F1851BBB9E2F00273C58 /* slicktvTests.swift */,
+				F627F1831BBB9E2F00273C58 /* Supporting Files */,
+			);
+			path = slicktvTests;
+			sourceTree = "<group>";
+		};
+		F627F1831BBB9E2F00273C58 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F627F1841BBB9E2F00273C58 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F627F1661BBB9E2F00273C58 /* slicktv */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F627F1891BBB9E2F00273C58 /* Build configuration list for PBXNativeTarget "slicktv" */;
+			buildPhases = (
+				F627F1631BBB9E2F00273C58 /* Sources */,
+				F627F1641BBB9E2F00273C58 /* Frameworks */,
+				F627F1651BBB9E2F00273C58 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = slicktv;
+			productName = slicktv;
+			productReference = F627F1671BBB9E2F00273C58 /* slicktv.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F627F17E1BBB9E2F00273C58 /* slicktvTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F627F18C1BBB9E2F00273C58 /* Build configuration list for PBXNativeTarget "slicktvTests" */;
+			buildPhases = (
+				F627F17B1BBB9E2F00273C58 /* Sources */,
+				F627F17C1BBB9E2F00273C58 /* Frameworks */,
+				F627F17D1BBB9E2F00273C58 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F627F1811BBB9E2F00273C58 /* PBXTargetDependency */,
+			);
+			name = slicktvTests;
+			productName = slicktvTests;
+			productReference = F627F17F1BBB9E2F00273C58 /* slicktvTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F627F15F1BBB9E2F00273C58 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = "Stanley Chiang";
+				TargetAttributes = {
+					F627F1661BBB9E2F00273C58 = {
+						CreatedOnToolsVersion = 6.4;
+						DevelopmentTeam = 4C8V97R8N3;
+					};
+					F627F17E1BBB9E2F00273C58 = {
+						CreatedOnToolsVersion = 6.4;
+						TestTargetID = F627F1661BBB9E2F00273C58;
+					};
+				};
+			};
+			buildConfigurationList = F627F1621BBB9E2F00273C58 /* Build configuration list for PBXProject "slicktv" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F627F15E1BBB9E2F00273C58;
+			productRefGroup = F627F1681BBB9E2F00273C58 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F627F1661BBB9E2F00273C58 /* slicktv */,
+				F627F17E1BBB9E2F00273C58 /* slicktvTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F627F1651BBB9E2F00273C58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F627F1751BBB9E2F00273C58 /* Main.storyboard in Resources */,
+				F627F17A1BBB9E2F00273C58 /* LaunchScreen.xib in Resources */,
+				F627F1771BBB9E2F00273C58 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F627F17D1BBB9E2F00273C58 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F627F1631BBB9E2F00273C58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F627F1721BBB9E2F00273C58 /* ViewController.swift in Sources */,
+				F627F1701BBB9E2F00273C58 /* slicktv.xcdatamodeld in Sources */,
+				F627F16D1BBB9E2F00273C58 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F627F17B1BBB9E2F00273C58 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F627F1861BBB9E2F00273C58 /* slicktvTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F627F1811BBB9E2F00273C58 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F627F1661BBB9E2F00273C58 /* slicktv */;
+			targetProxy = F627F1801BBB9E2F00273C58 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F627F1731BBB9E2F00273C58 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F627F1741BBB9E2F00273C58 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		F627F1781BBB9E2F00273C58 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F627F1791BBB9E2F00273C58 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F627F1871BBB9E2F00273C58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		F627F1881BBB9E2F00273C58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F627F18A1BBB9E2F00273C58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = slicktv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		F627F18B1BBB9E2F00273C58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				INFOPLIST_FILE = slicktv/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		F627F18D1BBB9E2F00273C58 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = slicktvTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/slicktv.app/slicktv";
+			};
+			name = Debug;
+		};
+		F627F18E1BBB9E2F00273C58 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = slicktvTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/slicktv.app/slicktv";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F627F1621BBB9E2F00273C58 /* Build configuration list for PBXProject "slicktv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F627F1871BBB9E2F00273C58 /* Debug */,
+				F627F1881BBB9E2F00273C58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F627F1891BBB9E2F00273C58 /* Build configuration list for PBXNativeTarget "slicktv" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F627F18A1BBB9E2F00273C58 /* Debug */,
+				F627F18B1BBB9E2F00273C58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		F627F18C1BBB9E2F00273C58 /* Build configuration list for PBXNativeTarget "slicktvTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F627F18D1BBB9E2F00273C58 /* Debug */,
+				F627F18E1BBB9E2F00273C58 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F627F16E1BBB9E2F00273C58 /* slicktv.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F627F16F1BBB9E2F00273C58 /* slicktv.xcdatamodel */,
+			);
+			currentVersion = F627F16F1BBB9E2F00273C58 /* slicktv.xcdatamodel */;
+			path = slicktv.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = F627F15F1BBB9E2F00273C58 /* Project object */;
+}
