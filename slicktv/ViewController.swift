@@ -8,18 +8,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIWebViewDelegate {
 
+    @IBOutlet weak var textURL: UITextField!
+    @IBOutlet weak var webView: UIWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        webView!.delegate = self
+        loadLink("https://google.com")
+//        textURL.text = "http://vodlocker.com/vzxb56qffdf4"
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+//    link must be fully formatted with 'http://'
+    func loadLink(link: String){
+        var url = NSURL(string: link)
+        var request = NSURLRequest(URL: url!)
+        webView!.loadRequest(request)
     }
-
+    
+    @IBAction func goButtonPressed(sender: UIButton) {
+        loadLink(textURL.text)
+        textURL.resignFirstResponder()
+    }
 
 }
 
