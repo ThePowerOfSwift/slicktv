@@ -14,6 +14,9 @@
 		F627F1771BBB9E2F00273C58 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F627F1761BBB9E2F00273C58 /* Images.xcassets */; };
 		F627F17A1BBB9E2F00273C58 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F627F1781BBB9E2F00273C58 /* LaunchScreen.xib */; };
 		F627F1861BBB9E2F00273C58 /* slicktvTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F627F1851BBB9E2F00273C58 /* slicktvTests.swift */; };
+		F680247D1BC39CEA00DA21B9 /* videoStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */; };
+		F680247F1BC3C05100DA21B9 /* extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F680247E1BC3C05100DA21B9 /* extractor.swift */; };
+		F68024811BC3C0F100DA21B9 /* host.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68024801BC3C0F100DA21B9 /* host.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +41,9 @@
 		F627F17F1BBB9E2F00273C58 /* slicktvTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = slicktvTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F627F1841BBB9E2F00273C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F627F1851BBB9E2F00273C58 /* slicktvTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = slicktvTests.swift; sourceTree = "<group>"; };
+		F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = videoStreamer.swift; sourceTree = "<group>"; };
+		F680247E1BC3C05100DA21B9 /* extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extractor.swift; path = ../extractor.swift; sourceTree = "<group>"; };
+		F68024801BC3C0F100DA21B9 /* host.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = host.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +87,9 @@
 			children = (
 				F627F16C1BBB9E2F00273C58 /* AppDelegate.swift */,
 				F627F1711BBB9E2F00273C58 /* ViewController.swift */,
+				F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */,
+				F68024801BC3C0F100DA21B9 /* host.swift */,
+				F680247E1BC3C05100DA21B9 /* extractor.swift */,
 				F627F1731BBB9E2F00273C58 /* Main.storyboard */,
 				F627F1761BBB9E2F00273C58 /* Images.xcassets */,
 				F627F1781BBB9E2F00273C58 /* LaunchScreen.xib */,
@@ -216,7 +225,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F680247D1BC39CEA00DA21B9 /* videoStreamer.swift in Sources */,
+				F680247F1BC3C05100DA21B9 /* extractor.swift in Sources */,
 				F627F1721BBB9E2F00273C58 /* ViewController.swift in Sources */,
+				F68024811BC3C0F100DA21B9 /* host.swift in Sources */,
 				F627F1701BBB9E2F00273C58 /* slicktv.xcdatamodeld in Sources */,
 				F627F16D1BBB9E2F00273C58 /* AppDelegate.swift in Sources */,
 			);
@@ -418,6 +430,7 @@
 				F627F18B1BBB9E2F00273C58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F627F18C1BBB9E2F00273C58 /* Build configuration list for PBXNativeTarget "slicktvTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +439,7 @@
 				F627F18E1BBB9E2F00273C58 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

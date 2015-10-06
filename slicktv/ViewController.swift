@@ -9,61 +9,39 @@
 import UIKit
 import MediaPlayer
 
-class ViewController: UIViewController, UIWebViewDelegate {
+class ViewController: UIViewController {
 
     @IBOutlet weak var textURL: UITextField!
-    @IBOutlet weak var webView: UIWebView!
-    var link = ""
     let player:MPMoviePlayerController = MPMoviePlayerController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        webView!.delegate = self
-        webView?.hidden = true
-        loadLink("https://google.com")
         textURL.text = "http://vodlocker.com/vzxb56qffdf4"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
     }
 
-//    link must be fully formatted with 'http://'
-    func loadLink(link: String){
-        var url = NSURL(string: link)
-        var request = NSURLRequest(URL: url!)
-        webView!.loadRequest(request)
-//        webView!.frame.size.width = 0
-//        webView!.frame.size.height = 0
-    }
-
-    func loadVideo(link: String){
-        var url = NSURL(string: link)
-        
+    func loadVideo(link: NSURL){
         player.view.frame = self.view.bounds
-        self.view.addSubview(player.view)
-
-//this allows us to switch orientations during the video but breaks video dismissing functionality
-//        player.fullscreen = true
         player.movieSourceType = MPMovieSourceType.Streaming
         player.controlStyle = MPMovieControlStyle.Fullscreen
         player.scalingMode = MPMovieScalingMode.AspectFill
-        player.contentURL = url!
+        player.contentURL = link
         player.prepareToPlay()
-        player.play()
+
         self.tabBarController?.tabBar.hidden = true
-    }
-    
-    func matchesForRegexInText(regex: String!, text: String!) -> [String] {
-        let regex = NSRegularExpression(pattern: regex,
-            options: nil, error: nil)!
-        let nsString = text as NSString
-        let results = regex.matchesInString(text,
-            options: nil, range: NSMakeRange(0, nsString.length))
-            as! [NSTextCheckingResult]
-        return map(results) { nsString.substringWithRange($0.range)}
+        self.view.addSubview(player.view)
+        player.play()
     }
     
     @IBAction func goButtonPressed(sender: UIButton) {
-        loadLink(textURL.text)
-        textURL.resignFirstResponder()
+        //initializing a video streamer creates an object that then contains the embedded video nsurl
+        let video:videoStreamer = videoStreamer(url: textURL.text)
+        if let _embeddedLink = video.embeddedLink{
+            loadVideo(_embeddedLink)
+            textURL.resignFirstResponder()
+        }else{
+            println("no embedded link found")
+        }
     }
     
     func doneButtonClick(sender:NSNotification?){
@@ -71,24 +49,4 @@ class ViewController: UIViewController, UIWebViewDelegate {
         player.view.removeFromSuperview()
         self.tabBarController?.tabBar.hidden = false
     }
-    
-    func webViewDidFinishLoad(webView: UIWebView) {
-        var dom = webView.stringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML")!
-        
-        var matchesVodlocker = matchesForRegexInText("\"(.+v\\.mp4)", text: dom)
-        if link == "" && matchesVodlocker != [] && matchesVodlocker[0] != "" {
-            link = dropFirst(matchesVodlocker[0])
-            loadVideo(link)
-            link = ""
-        }
-
-//        var matchesAllMyVideos = matchesForRegexInText("\"file\" : \"(.+v2)", text: dom)
-//        if link == "" && matchesAllMyVideos != [] && matchesAllMyVideos[0] != "" {
-//            link = dropFirst(matchesAllMyVideos[0])
-//            self.performSegueWithIdentifier("foundLink", sender: self)
-//        }
-
-    }
-
 }
-

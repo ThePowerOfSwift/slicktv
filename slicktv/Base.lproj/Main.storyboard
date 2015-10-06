@@ -35,11 +35,6 @@
                                     <action selector="goButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1W9-Un-JyD"/>
                                 </connections>
                             </button>
-                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ze8-pp-Nnd">
-                                <rect key="frame" x="16" y="58" width="568" height="522"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <dataDetectorType key="dataDetectorTypes" link="YES"/>
-                            </webView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -53,7 +48,6 @@
                     <tabBarItem key="tabBarItem" title="33" id="kqL-DO-hir"/>
                     <connections>
                         <outlet property="textURL" destination="PbG-1B-q0K" id="LbI-sZ-gg9"/>
-                        <outlet property="webView" destination="Ze8-pp-Nnd" id="NCV-qi-m7Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
