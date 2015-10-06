@@ -8,25 +8,29 @@
 
 import UIKit
 
-class videoStreamer:NSObject, UIWebViewDelegate{
+class videoStreamer:UIView, UIWebViewDelegate{
 
     var webView: UIWebView? = UIWebView(frame: CGRectMake(0, 0, 0, 0))
     var embeddedLink: NSURL?
     
     init(url:String){
-        super.init()
-        webView?.delegate = self
-        webView?.hidden = true
-        
+        super.init(frame: CGRectMake(0, 0, 0, 0))
+        self.addSubview(webView!)
         //this takes the url string and makes a web request
         loadLink(url)
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
     //    link must be fully formatted with 'http://'
     func loadLink(link: String){
         var url = NSURL(string: link)
         var request = NSURLRequest(URL: url!)
-        
+        webView?.delegate = self
+        webView?.hidden = true
+
         //request goes to webViewDidFinishLoad
         webView!.loadRequest(request)
     }
@@ -54,4 +58,6 @@ class videoStreamer:NSObject, UIWebViewDelegate{
         var streamer = host.vodlocker
         return streamer
     }
+    
+
 }

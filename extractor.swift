@@ -32,7 +32,11 @@ class extractor:NSObject{
             var matches = matchesForRegexInText(_regex, text: dom)
             if link == nil && matches != [] && matches[0] != "" {
                 link = dropFirst(matches[0])
+            }else{
+                println("no matching link")
             }
+        }else{
+            println("no regex found")
         }
         return link
     }

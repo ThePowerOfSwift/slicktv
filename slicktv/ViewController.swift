@@ -36,6 +36,7 @@ class ViewController: UIViewController {
     @IBAction func goButtonPressed(sender: UIButton) {
         //initializing a video streamer creates an object that then contains the embedded video nsurl
         let video:videoStreamer = videoStreamer(url: textURL.text)
+        self.view.addSubview(video)
         if let _embeddedLink = video.embeddedLink{
             loadVideo(_embeddedLink)
             textURL.resignFirstResponder()
