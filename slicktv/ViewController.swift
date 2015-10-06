@@ -19,6 +19,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView!.delegate = self
+        webView?.hidden = true
         loadLink("https://google.com")
         textURL.text = "http://vodlocker.com/vzxb56qffdf4"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
@@ -29,6 +30,8 @@ class ViewController: UIViewController, UIWebViewDelegate {
         var url = NSURL(string: link)
         var request = NSURLRequest(URL: url!)
         webView!.loadRequest(request)
+//        webView!.frame.size.width = 0
+//        webView!.frame.size.height = 0
     }
 
     func loadVideo(link: String){

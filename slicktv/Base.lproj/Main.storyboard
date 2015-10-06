@@ -35,7 +35,7 @@
                                     <action selector="goButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1W9-Un-JyD"/>
                                 </connections>
                             </button>
-                            <webView contentMode="scaleToFill" misplaced="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ze8-pp-Nnd">
+                            <webView contentMode="scaleToFill" fixedFrame="YES" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ze8-pp-Nnd">
                                 <rect key="frame" x="16" y="58" width="568" height="522"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <dataDetectorType key="dataDetectorTypes" link="YES"/>
@@ -44,14 +44,10 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="PbG-1B-q0K" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="11A-ED-Dt1"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Ze8-pp-Nnd" secondAttribute="bottom" constant="20" id="ILR-zx-KM0"/>
                             <constraint firstItem="wIs-I2-Kg2" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="TNG-px-pTC"/>
-                            <constraint firstItem="Ze8-pp-Nnd" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="Yla-dB-RSd"/>
                             <constraint firstItem="PbG-1B-q0K" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="cB2-Wy-xhO"/>
                             <constraint firstItem="wIs-I2-Kg2" firstAttribute="leading" secondItem="PbG-1B-q0K" secondAttribute="trailing" constant="8" id="e7e-v2-W23"/>
-                            <constraint firstItem="Ze8-pp-Nnd" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fHI-nf-IVs"/>
                             <constraint firstItem="wIs-I2-Kg2" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="no6-Ph-9LL"/>
-                            <constraint firstItem="Ze8-pp-Nnd" firstAttribute="top" secondItem="wIs-I2-Kg2" secondAttribute="bottom" constant="8" id="uoH-e0-oJN"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="33" id="kqL-DO-hir"/>
