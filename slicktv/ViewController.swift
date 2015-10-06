@@ -45,6 +45,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
         player.contentURL = url!
         player.prepareToPlay()
         player.play()
+        self.tabBarController?.tabBar.hidden = true
     }
     
     func matchesForRegexInText(regex: String!, text: String!) -> [String] {
@@ -65,6 +66,7 @@ class ViewController: UIViewController, UIWebViewDelegate {
     func doneButtonClick(sender:NSNotification?){
         player.stop()
         player.view.removeFromSuperview()
+        self.tabBarController?.tabBar.hidden = false
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
