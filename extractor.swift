@@ -20,25 +20,20 @@ class extractor:NSObject{
     }
     
     func videoExtractor(streamer:host,dom:String) -> String? {
-        
-        //move this regex into the enum file. so that i can call the type of the host in the option chain
-        switch streamer {
-        case .vodlocker: regex = "\"(.+v\\.mp4)"
-        case .allmyvideos: regex = "\"file\" : \"(.+v2)"
-        default: regex = nil
-        }
 
+        var regex:String? = streamer.rawValue
         if let _regex = regex {
             var matches = matchesForRegexInText(_regex, text: dom)
             if link == nil && matches != [] && matches[0] != "" {
                 link = dropFirst(matches[0])
+                println(link!)
+                return link!
             }else{
-                println("no matching link")
+                return nil
             }
         }else{
-            println("no regex found")
+            return nil
         }
-        return link
     }
     
     func matchesForRegexInText(regex: String!, text: String!) -> [String] {

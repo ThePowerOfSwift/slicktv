@@ -40,8 +40,6 @@ class ViewController: UIViewController {
         if let _embeddedLink = video.embeddedLink{
             loadVideo(_embeddedLink)
             textURL.resignFirstResponder()
-        }else{
-            println("no embedded link found")
         }
     }
     

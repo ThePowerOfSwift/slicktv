@@ -37,12 +37,14 @@ class videoStreamer:UIView, UIWebViewDelegate{
 
     func webViewDidFinishLoad(webView: UIWebView) {
         //get dom of request
-        let dom:String = webView.stringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML")!
-        let link:String = (webView.request?.URL?.absoluteString)!
+        if !webView.loading{
+            let dom:String = webView.stringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML")!
+            let link:String = (webView.request?.URL?.absoluteString)!
 
-        if let embeddedVideo:String = extractVideo(link,dom: dom){
-            //have a function that parses doms based on the domain and return the link to the embedded video
-            self.embeddedLink = NSURL(string: embeddedVideo)
+            if let embeddedVideo:String = extractVideo(link,dom: dom){
+                //have a function that parses doms based on the domain and return the link to the embedded video
+                self.embeddedLink = NSURL(string: embeddedVideo)
+            }
         }
     }
    

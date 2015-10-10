@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum host {
-    case vodlocker
-    case allmyvideos
+enum host:String {
+    case vodlocker = "\"(.+v\\.mp4)"
+    case allmyvideos = "\"file\" : \"(.+v2)"
 }
