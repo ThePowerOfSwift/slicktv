@@ -48,6 +48,8 @@ class ViewController: UIViewController {
         video = videoStreamer(url: textURL.text)
         self.view.addSubview(video!)
         textURL.resignFirstResponder()
+
+        useExtractedLink(extractedLink: video!.embeddedLink!)
     }
     
     
