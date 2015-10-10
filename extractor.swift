@@ -26,7 +26,6 @@ class extractor:NSObject{
             var matches = matchesForRegexInText(_regex, text: dom)
             if link == nil && matches != [] && matches[0] != "" {
                 link = dropFirst(matches[0])
-                println(link!)
                 return link!
             }else{
                 return nil

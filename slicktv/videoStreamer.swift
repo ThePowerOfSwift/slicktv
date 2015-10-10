@@ -43,6 +43,8 @@ class videoStreamer:UIView, UIWebViewDelegate{
 
             if let embeddedVideo:String = extractVideo(link,dom: dom){
                 //have a function that parses doms based on the domain and return the link to the embedded video
+                println("streamer")
+                println(embeddedVideo)
                 self.embeddedLink = NSURL(string: embeddedVideo)
             }
         }

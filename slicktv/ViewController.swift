@@ -13,7 +13,8 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var textURL: UITextField!
     let player:MPMoviePlayerController = MPMoviePlayerController()
-
+    var video:videoStreamer?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         textURL.text = "http://vodlocker.com/vzxb56qffdf4"
@@ -35,13 +36,21 @@ class ViewController: UIViewController {
     
     @IBAction func goButtonPressed(sender: UIButton) {
         //initializing a video streamer creates an object that then contains the embedded video nsurl
-        let video:videoStreamer = videoStreamer(url: textURL.text)
-        self.view.addSubview(video)
-        if let _embeddedLink = video.embeddedLink{
-            loadVideo(_embeddedLink)
-            textURL.resignFirstResponder()
-        }
+        
+        getVideo(textURL.text, useExtractedLink: { (extractedLink:NSURL) -> () in
+                println("VC")
+                println(extractedLink)
+                self.loadVideo(extractedLink)
+        })
     }
+    
+    func getVideo(url:String, useExtractedLink:(extractedLink:NSURL)-> ()){
+        video = videoStreamer(url: textURL.text)
+        self.view.addSubview(video!)
+        textURL.resignFirstResponder()
+    }
+    
+    
     
     func doneButtonClick(sender:NSNotification?){
         player.stop()
