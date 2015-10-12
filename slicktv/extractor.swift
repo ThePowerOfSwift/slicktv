@@ -21,6 +21,9 @@ class extractor:NSObject{
     
     func videoExtractor(streamer:host,dom:String) -> String? {
 
+        if streamer == host.none{
+            return nil
+        }
         var regex:String? = streamer.rawValue
         if let _regex = regex {
             var matches = matchesForRegexInText(_regex, text: dom)

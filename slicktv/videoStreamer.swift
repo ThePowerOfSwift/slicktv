@@ -59,8 +59,14 @@ class videoStreamer:UIView, UIWebViewDelegate{
     }
     
     func classify(link:String) -> host{
-        var streamer = host.vodlocker
-        return streamer
+
+        if let match = link.rangeOfString("vodlocker", options: .RegularExpressionSearch){
+            return host.vodlocker
+        }
+        if let match = link.rangeOfString("allmyvideos", options: .RegularExpressionSearch){
+            return host.allmyvideos
+        }
+        return host.none
     }
     
 

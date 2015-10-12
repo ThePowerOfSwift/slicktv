@@ -11,4 +11,5 @@ import Foundation
 enum host:String {
     case vodlocker = "\"(.+v\\.mp4)"
     case allmyvideos = "\"file\" : \"(.+v2)"
+    case none = ""
 }
