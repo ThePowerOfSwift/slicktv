@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44069B163557076C9017429E /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A3030867875DE13E089AA8D /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		F627F16D1BBB9E2F00273C58 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F627F16C1BBB9E2F00273C58 /* AppDelegate.swift */; };
 		F627F1701BBB9E2F00273C58 /* slicktv.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F627F16E1BBB9E2F00273C58 /* slicktv.xcdatamodeld */; };
 		F627F1721BBB9E2F00273C58 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F627F1711BBB9E2F00273C58 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 		F65162AD1BDC0EE7009A38F1 /* rawLinkSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F65162A91BDC0A5B009A38F1 /* rawLinkSource.swift */; };
 		F680247D1BC39CEA00DA21B9 /* videoStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */; };
 		F68024811BC3C0F100DA21B9 /* host.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68024801BC3C0F100DA21B9 /* host.swift */; };
+		F6BE84091BDC2678007F7C1C /* network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE84081BDC2678007F7C1C /* network.swift */; };
 		F6D0116D1BC9ADDD003A0975 /* extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D0116C1BC9ADDD003A0975 /* extractor.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1A3030867875DE13E089AA8D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53B27F561F7CFFEA10C1F7BA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		AB7DBF51432FE85ACA281EF3 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		F627F1671BBB9E2F00273C58 /* slicktv.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slicktv.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F627F16B1BBB9E2F00273C58 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F627F16C1BBB9E2F00273C58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +52,7 @@
 		F65162AB1BDC0C0A009A38F1 /* tvshow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tvshow.swift; sourceTree = "<group>"; };
 		F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = videoStreamer.swift; sourceTree = "<group>"; };
 		F68024801BC3C0F100DA21B9 /* host.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = host.swift; sourceTree = "<group>"; };
+		F6BE84081BDC2678007F7C1C /* network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = network.swift; sourceTree = "<group>"; };
 		F6D0116C1BC9ADDD003A0975 /* extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -55,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44069B163557076C9017429E /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,12 +75,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		702DC7CD6CE167D9F5987B3F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				53B27F561F7CFFEA10C1F7BA /* Pods.debug.xcconfig */,
+				AB7DBF51432FE85ACA281EF3 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		78F0C691F84044756D2568AD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1A3030867875DE13E089AA8D /* Pods.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F627F15E1BBB9E2F00273C58 = {
 			isa = PBXGroup;
 			children = (
 				F627F1691BBB9E2F00273C58 /* slicktv */,
 				F627F1821BBB9E2F00273C58 /* slicktvTests */,
 				F627F1681BBB9E2F00273C58 /* Products */,
+				702DC7CD6CE167D9F5987B3F /* Pods */,
+				78F0C691F84044756D2568AD /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,6 +120,7 @@
 				F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */,
 				F6D0116C1BC9ADDD003A0975 /* extractor.swift */,
 				F65162A91BDC0A5B009A38F1 /* rawLinkSource.swift */,
+				F6BE84081BDC2678007F7C1C /* network.swift */,
 				F65162AB1BDC0C0A009A38F1 /* tvshow.swift */,
 				F68024801BC3C0F100DA21B9 /* host.swift */,
 				F627F1731BBB9E2F00273C58 /* Main.storyboard */,
@@ -137,9 +164,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F627F1891BBB9E2F00273C58 /* Build configuration list for PBXNativeTarget "slicktv" */;
 			buildPhases = (
+				74C0DF05140CCD971C1373B8 /* Check Pods Manifest.lock */,
 				F627F1631BBB9E2F00273C58 /* Sources */,
 				F627F1641BBB9E2F00273C58 /* Frameworks */,
 				F627F1651BBB9E2F00273C58 /* Resources */,
+				0CC7615FEEE1E3E196B87360 /* Embed Pods Frameworks */,
+				472DBF3BB8911BD22724084A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -226,6 +256,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0CC7615FEEE1E3E196B87360 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		472DBF3BB8911BD22724084A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		74C0DF05140CCD971C1373B8 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F627F1631BBB9E2F00273C58 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -238,6 +316,7 @@
 				F68024811BC3C0F100DA21B9 /* host.swift in Sources */,
 				F627F1701BBB9E2F00273C58 /* slicktv.xcdatamodeld in Sources */,
 				F627F16D1BBB9E2F00273C58 /* AppDelegate.swift in Sources */,
+				F6BE84091BDC2678007F7C1C /* network.swift in Sources */,
 				F65162AD1BDC0EE7009A38F1 /* rawLinkSource.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -365,6 +444,7 @@
 		};
 		F627F18A1BBB9E2F00273C58 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53B27F561F7CFFEA10C1F7BA /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -376,6 +456,7 @@
 		};
 		F627F18B1BBB9E2F00273C58 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AB7DBF51432FE85ACA281EF3 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
