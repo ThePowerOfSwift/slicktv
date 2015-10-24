@@ -17,7 +17,8 @@ class ViewController: UIViewController,linkDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textURL.text = "http://vodlocker.com/vzxb56qffdf4"
+//        curl --data "action=2h&sri=0.6509881792590022&o_item0=1814081" "http://www.tvmuse.com/ajax.php"
+//        textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
     }
 
