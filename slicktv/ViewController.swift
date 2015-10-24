@@ -14,19 +14,36 @@ class ViewController: UIViewController,linkDelegate {
     @IBOutlet weak var textURL: UITextField!
     let player:MPMoviePlayerController = MPMoviePlayerController()
     var video:videoStreamer?
+    var myshow:tvshow?
+    var fullSourceLink:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        textURL.text = "Rick-and-Morty_35955"
+        
+        myshow = tvshow(name: textURL.text, season: 1, episode: 1)
+        
+        fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
+        
+//        make object with webview
+//        load fullSourceLink dom
+//        extract and return "#div_com_..." id values
+//        send post request as built below
+//        extract usable links into array
+//        try extracting videos from links
+        
 //        curl --data "action=2h&sri=0.6509881792590022&o_item0=1814081" "http://www.tvmuse.com/ajax.php"
-//        textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
+        textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
+        NSNotificationCenter.defaultCenter() .addObserver(self, selector: "movieOrientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
     func loadVideo(link: NSURL){
         player.view.frame = self.view.bounds
         player.movieSourceType = MPMovieSourceType.Streaming
-        player.controlStyle = MPMovieControlStyle.Fullscreen
-        player.scalingMode = MPMovieScalingMode.AspectFill
+        player.controlStyle = MPMovieControlStyle.Embedded
+        player.scalingMode = MPMovieScalingMode.AspectFit
         player.contentURL = link
         player.prepareToPlay()
 
@@ -48,7 +65,9 @@ class ViewController: UIViewController,linkDelegate {
         loadVideo(link)
     }
     
-    
+    func movieOrientationChanged(sender:NSNotification?) {
+        player.view.frame = self.view.bounds
+    }
     func doneButtonClick(sender:NSNotification?){
         player.stop()
         player.view.removeFromSuperview()

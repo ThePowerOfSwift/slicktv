@@ -10,4 +10,8 @@ import Foundation
 
 class rawLinkSource {
     
+    var fullLink:String
+    init(show:tvshow, source:String){
+        fullLink = "http://www.tvmuse.com/tv-shows/\(show.name)/season_\(show.season)/episode_\(show.episode)/"
+    }
 }
