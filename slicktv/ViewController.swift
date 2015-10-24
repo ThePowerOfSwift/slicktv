@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class ViewController: UIViewController {
+class ViewController: UIViewController,linkDelegate {
 
     @IBOutlet weak var textURL: UITextField!
     let player:MPMoviePlayerController = MPMoviePlayerController()
@@ -37,21 +37,15 @@ class ViewController: UIViewController {
     @IBAction func goButtonPressed(sender: UIButton) {
         //initializing a video streamer creates an object that then contains the embedded video nsurl
         
-        getVideo(textURL.text, useExtractedLink: { (extractedLink:NSURL) -> () in
-                println("VC")
-                println(extractedLink)
-                self.loadVideo(extractedLink)
-        })
-    }
-    
-    func getVideo(url:String, useExtractedLink:(extractedLink:NSURL)-> ()){
         video = videoStreamer(url: textURL.text)
+        video?.delegate = self
         self.view.addSubview(video!)
         textURL.resignFirstResponder()
-
-        useExtractedLink(extractedLink: video!.embeddedLink!)
     }
     
+    func didfinish(link: NSURL) {
+        loadVideo(link)
+    }
     
     
     func doneButtonClick(sender:NSNotification?){

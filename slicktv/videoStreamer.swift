@@ -8,8 +8,13 @@
 
 import UIKit
 
+protocol linkDelegate{
+    func didfinish(link:NSURL)
+}
+
 class videoStreamer:UIView, UIWebViewDelegate{
 
+    var delegate:linkDelegate?
     var webView: UIWebView? = UIWebView(frame: CGRectMake(0, 0, 0, 0))
     var embeddedLink: NSURL?
     
@@ -40,12 +45,11 @@ class videoStreamer:UIView, UIWebViewDelegate{
         if !webView.loading{
             let dom:String = webView.stringByEvaluatingJavaScriptFromString("document.documentElement.innerHTML")!
             let link:String = (webView.request?.URL?.absoluteString)!
-
+            
             if let embeddedVideo:String = extractVideo(link,dom: dom){
                 //have a function that parses doms based on the domain and return the link to the embedded video
-                println("streamer")
-                println(embeddedVideo)
-                self.embeddedLink = NSURL(string: embeddedVideo)
+                embeddedLink = NSURL(string: embeddedVideo)
+                delegate?.didfinish(embeddedLink!)
             }
         }
     }
