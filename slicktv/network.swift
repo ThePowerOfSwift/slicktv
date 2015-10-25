@@ -8,3 +8,19 @@
 
 import Foundation
 import Alamofire
+
+class Network {
+    static let sharedInstance = Network()
+    private init() {}
+    
+    func getEpisodePage(link:String, success:(response:AnyObject)->Void,failure:(error:AnyObject)->Void) {
+        Alamofire.request(.GET, link)
+            .responseString { response in
+                if let _response = response.2 {
+                    success(response: _response)
+                }else if let _error = response.3{
+                    failure(error: _error)
+                }
+        }
+    }
+}

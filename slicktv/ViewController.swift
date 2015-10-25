@@ -8,6 +8,7 @@
 
 import UIKit
 import MediaPlayer
+import Alamofire
 
 class ViewController: UIViewController,linkDelegate {
 
@@ -25,10 +26,19 @@ class ViewController: UIViewController,linkDelegate {
         myshow = tvshow(name: textURL.text, season: 1, episode: 1)
         
         fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
-        
-//        make object with webview
+
 //        load fullSourceLink dom
+        Network.sharedInstance.getEpisodePage(fullSourceLink,
+            success: { (response) -> Void in
+                    println(response)
+            }) { (error) -> Void in
+                println(error)
+        }
+        
 //        extract and return "#div_com_..." id values
+        
+        
+        
 //        send post request as built below
 //        extract usable links into array
 //        try extracting videos from links
