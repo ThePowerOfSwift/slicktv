@@ -23,4 +23,16 @@ class Network {
                 }
         }
     }
+
+    func getHostLink(link:String,params: [String: AnyObject], success:(response:String)->Void,failure:(error:AnyObject)->Void) {
+        Alamofire.request(.POST, link, parameters:params)
+            .responseString { response in
+                if let _response = response.2 {
+                    success(response: _response as String)
+                }else if let _error = response.3{
+                    failure(error: _error)
+                }
+        }
+    }
+
 }
