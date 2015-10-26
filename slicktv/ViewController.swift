@@ -124,4 +124,12 @@ class ViewController: UIViewController,linkDelegate {
         }
         return ""
     }
+    
+    func getHostPage(){
+        Network.sharedInstance.getHostPage("http://vodlocker.com/82vqdnh0s9ow", success: { (response) -> Void in
+                println("success: \(response)")
+            }) { (error) -> Void in
+                println("error: \(error)")
+        }
+    }
 }
