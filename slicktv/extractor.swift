@@ -48,4 +48,19 @@ class extractor:NSObject{
         return map(results) { nsString.substringWithRange($0.range)}
     }
     
+    //find all that match
+    func regexMatches(pattern: String, text: String) -> Array<String> {
+        let re = NSRegularExpression(pattern: pattern, options: nil, error: nil)!
+        let matches = re.matchesInString(text, options: nil, range: NSRange(location: 0, length: count(text.utf16)))
+        
+        var collectMatches: Array<String> = []
+        for match in matches as! Array<NSTextCheckingResult> {
+            // range at index 0: full match
+            // range at index 1: first capture group
+            let substring = (text as NSString).substringWithRange(match.rangeAtIndex(1))
+            collectMatches.append(substring)
+        }
+        return collectMatches
+    }
+    
 }

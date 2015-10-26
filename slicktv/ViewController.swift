@@ -17,7 +17,7 @@ class ViewController: UIViewController,linkDelegate {
     var video:videoStreamer?
     var myshow:tvshow?
     var fullSourceLink:String!
-    
+    var sourceDom:String!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,14 +30,19 @@ class ViewController: UIViewController,linkDelegate {
 //        load fullSourceLink dom
         Network.sharedInstance.getEpisodePage(fullSourceLink,
             success: { (response) -> Void in
-                    println(response)
+
+//        extract and return div_com_(\\d*)\\D id values
+                let re = NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: nil, error: nil)!
+                let matches = re.matchesInString(response, options: nil, range: NSRange(location: 0, length: count(response.utf16)))
+                for match in matches as! [NSTextCheckingResult] {
+                    // range at index 0: full match
+                    // range at index 1: first capture group
+                    let substring = (response as NSString).substringWithRange(match.rangeAtIndex(1))
+                    println(substring)
+                }
             }) { (error) -> Void in
                 println(error)
         }
-        
-//        extract and return "#div_com_..." id values
-        
-        
         
 //        send post request as built below
 //        extract usable links into array
