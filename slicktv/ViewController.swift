@@ -37,32 +37,37 @@ class ViewController: UIViewController,linkDelegate {
                 let re = NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: nil, error: nil)!
                 let matches = re.matchesInString(response, options: nil, range: NSRange(location: 0, length: count(response.utf16)))
                 var postResponse:String?
+                var done = false
                 for match in matches as! [NSTextCheckingResult] {
-                    // range at index 0: full match
-                    // range at index 1: first capture group
-                    let substring = (response as NSString).substringWithRange(match.rangeAtIndex(1))
-                    println(substring as String)
-                    
-//        send post request as built below
-//        curl --data "action=2h&sri=0.6509881792590022&o_item0=1814081" "http://www.tvmuse.com/ajax.php"
-                    var tvmuseParams:[String : AnyObject] = [
-                        "action":"2h",
-                        "o_item0":substring
-                    ]
-                    Network.sharedInstance.getHostLink(self.tvmuseAJAX, params: tvmuseParams,
-                        success: { (response) -> Void in
-                            postResponse = response
-                            println(postResponse)
+                    if done {
+                        break
+                    }else{
+                        // range at index 0: full match
+                        // range at index 1: first capture group
+                        let substring = (response as NSString).substringWithRange(match.rangeAtIndex(1))
+                        println(substring as String)
+                        
+                        //        send post request as built below
+                        //        curl --data "action=2h&sri=0.6509881792590022&o_item0=1814081" "http://www.tvmuse.com/ajax.php"
+                        var tvmuseParams:[String : AnyObject] = [
+                            "action":"2h",
+                            "o_item0":substring
+                        ]
+                        Network.sharedInstance.getHostLink(self.tvmuseAJAX, params: tvmuseParams,
+                            success: { (response) -> Void in
+                                postResponse = response
+                                println(postResponse)
 //                            how do I stop the for loop from here if i have what i need?
 //                            start extracting host links with /(http.*vodlocker\.com\/[[:alnum:]]*?)/U
-                            var pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
-                            var hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
-                            println(hostLink)
-                            
-                        },failure:
-                        { (error) -> Void in
-                            println(error)
-                    })
+                                var pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
+                                var hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
+                                println(hostLink)
+                                done = true
+                            },failure:
+                            { (error) -> Void in
+                                println(error)
+                        })
+                    }
                 }
             }) { (error) -> Void in
                 println(error)
@@ -102,6 +107,7 @@ class ViewController: UIViewController,linkDelegate {
     func movieOrientationChanged(sender:NSNotification?) {
         player.view.frame = self.view.bounds
     }
+    
     func doneButtonClick(sender:NSNotification?){
         player.stop()
         player.view.removeFromSuperview()
