@@ -9,6 +9,7 @@
 import UIKit
 import MediaPlayer
 import Alamofire
+import PromiseKit
 
 class ViewController: UIViewController,linkDelegate {
 
@@ -29,55 +30,50 @@ class ViewController: UIViewController,linkDelegate {
         
         fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
 
-//        load fullSourceLink dom
-        Network.sharedInstance.getEpisodePage(fullSourceLink,
-            success: { (response) -> Void in
-
-//        extract and return div_com_(\\d*)\\D id values
-                let re = NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: nil, error: nil)!
-                let matches = re.matchesInString(response, options: nil, range: NSRange(location: 0, length: count(response.utf16)))
-                var postResponse:String?
-                var done = false
-                for match in matches as! [NSTextCheckingResult] {
-                    if done {
-                        break
-                    }else{
-                        // range at index 0: full match
-                        // range at index 1: first capture group
-                        let substring = (response as NSString).substringWithRange(match.rangeAtIndex(1))
-                        println(substring as String)
-                        
-                        //        send post request as built below
-                        //        curl --data "action=2h&sri=0.6509881792590022&o_item0=1814081" "http://www.tvmuse.com/ajax.php"
-                        var tvmuseParams:[String : AnyObject] = [
-                            "action":"2h",
-                            "o_item0":substring
-                        ]
-                        Network.sharedInstance.getHostLink(self.tvmuseAJAX, params: tvmuseParams,
-                            success: { (response) -> Void in
-                                postResponse = response
-                                println(postResponse)
-//                            how do I stop the for loop from here if i have what i need?
-//                            start extracting host links with /(http.*vodlocker\.com\/[[:alnum:]]*?)/U
-                                var pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
-                                var hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
-                                println(hostLink)
-                                done = true
-                            },failure:
-                            { (error) -> Void in
-                                println(error)
-                        })
-                    }
-                }
-            }) { (error) -> Void in
-                println(error)
-        }
-        
         textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "movieOrientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
 
+    func VCgetHostLink(id:String){
+        var postResponse:String?
+        var tvmuseParams:[String : AnyObject] = [
+            "action":"2h",
+            "o_item0":id
+        ]
+        Network.sharedInstance.getHostLink(self.tvmuseAJAX, params: tvmuseParams,
+            success: { (response) -> Void in
+                postResponse = response
+                println(postResponse)
+                var pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
+                var hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
+            },failure:
+            { (error) -> Void in
+                println(error)
+        })
+    }
+    
+    func VCgetEpisodePage(fullLink:String){
+        //        load fullSourceLink dom
+        Network.sharedInstance.getEpisodePage(fullLink,
+            success: { (response) -> Void in
+                //        extract and return div_com_(\\d*)\\D id values
+                let re = NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: nil, error: nil)!
+                let matches = re.matchesInString(response, options: nil, range: NSRange(location: 0, length: count(response.utf16)))
+                
+                var done = false
+                for match in matches as! [NSTextCheckingResult] {
+                    if done {
+                        break
+                    }else{
+                        let substring = (response as NSString).substringWithRange(match.rangeAtIndex(1))
+                    }
+                }
+            }) { (error) -> Void in
+                println(error)
+        }
+    }
+    
     func loadVideo(link: NSURL){
         player.view.frame = self.view.bounds
         player.movieSourceType = MPMovieSourceType.Streaming
