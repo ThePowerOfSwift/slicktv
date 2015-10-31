@@ -24,11 +24,11 @@ class extractor:NSObject{
         if streamer == host.none{
             return nil
         }
-        var regex:String? = streamer.rawValue
+        let regex:String? = streamer.rawValue
         if let _regex = regex {
             var matches = matchesForRegexInText(_regex, text: dom)
             if link == nil && matches != [] && matches[0] != "" {
-                link = dropFirst(matches[0])
+                link = String(matches[0].characters.dropFirst())
                 return link!
             }else{
                 return nil
@@ -39,22 +39,22 @@ class extractor:NSObject{
     }
     
     func matchesForRegexInText(regex: String!, text: String!) -> [String] {
-        let regex = NSRegularExpression(pattern: regex,
-            options: nil, error: nil)!
+        let regex = try! NSRegularExpression(pattern: regex,
+            options: [])
         let nsString = text as NSString
         let results = regex.matchesInString(text,
-            options: nil, range: NSMakeRange(0, nsString.length))
-            as! [NSTextCheckingResult]
-        return map(results) { nsString.substringWithRange($0.range)}
+            options: [], range: NSMakeRange(0, nsString.length))
+            
+        return results.map { nsString.substringWithRange($0.range)}
     }
     
     //find all that match
     func regexMatches(pattern: String, text: String) -> Array<String> {
-        let re = NSRegularExpression(pattern: pattern, options: nil, error: nil)!
-        let matches = re.matchesInString(text, options: nil, range: NSRange(location: 0, length: count(text.utf16)))
+        let re = try! NSRegularExpression(pattern: pattern, options: [])
+        let matches = re.matchesInString(text, options: [], range: NSRange(location: 0, length: text.utf16.count))
         
         var collectMatches: Array<String> = []
-        for match in matches as! Array<NSTextCheckingResult> {
+        for match in matches {
             // range at index 0: full match
             // range at index 1: first capture group
             let substring = (text as NSString).substringWithRange(match.rangeAtIndex(1))

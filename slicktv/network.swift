@@ -17,10 +17,10 @@ class Network {
     func getEpisodePage(link:String, success:(response:String)->Void,failure:(error:AnyObject)->Void) {
         Alamofire.request(.GET, link)
             .responseString { response in
-                if let _response = response.2 {
-                    success(response: _response as String)
-                }else if let _error = response.3{
-                    failure(error: _error)
+                if response.result.isSuccess {
+                    success(response: response.result.value!)
+                }else{
+                    failure(error: response.result.error!)
                 }
         }
     }
@@ -31,10 +31,10 @@ class Network {
         ]
         Alamofire.request(.GET, link, headers:headers)
             .responseString { response in
-                if let _response = response.2 {
-                    success(response: _response as String)
-                }else if let _error = response.3{
-                    failure(error: _error)
+                if response.result.isSuccess {
+                    success(response: response.result.value!)
+                }else{
+                    failure(error: response.result.error!)
                 }
         }
     }
@@ -42,10 +42,10 @@ class Network {
     func getHostLink(link:String,params: [String: AnyObject], success:(response:String)->Void,failure:(error:AnyObject)->Void) {
         Alamofire.request(.POST, link, parameters:params)
             .responseString { response in
-                if let _response = response.2 {
-                    success(response: _response as String)
-                }else if let _error = response.3{
-                    failure(error: _error)
+                if response.result.isSuccess {
+                    success(response: response.result.value!)
+                }else{
+                    failure(error: response.result.error!)
                 }
         }
     }

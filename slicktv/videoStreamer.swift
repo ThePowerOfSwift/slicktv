@@ -25,14 +25,14 @@ class videoStreamer:UIView, UIWebViewDelegate{
         loadLink(url)
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     //    link must be fully formatted with 'http://'
     func loadLink(link: String){
-        var url = NSURL(string: link)
-        var request = NSURLRequest(URL: url!)
+        let url = NSURL(string: link)
+        let request = NSURLRequest(URL: url!)
         webView?.delegate = self
         webView?.hidden = true
 

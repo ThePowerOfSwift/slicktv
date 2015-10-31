@@ -26,10 +26,11 @@ class ViewController: UIViewController,linkDelegate {
         
         textURL.text = "Rick-and-Morty_35955"
         
-        myshow = tvshow(name: textURL.text, season: 1, episode: 1)
+        myshow = tvshow(name: textURL.text!, season: 1, episode: 1)
         
         fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
-
+        VCgetEpisodePage(fullSourceLink)
+        
         textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "movieOrientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -37,19 +38,19 @@ class ViewController: UIViewController,linkDelegate {
 
     func VCgetHostLink(id:String){
         var postResponse:String?
-        var tvmuseParams:[String : AnyObject] = [
+        let tvmuseParams:[String : AnyObject] = [
             "action":"2h",
             "o_item0":id
         ]
         Network.sharedInstance.getHostLink(self.tvmuseAJAX, params: tvmuseParams,
             success: { (response) -> Void in
                 postResponse = response
-                println(postResponse)
-                var pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
+                print(postResponse)
+                let pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
                 var hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
             },failure:
             { (error) -> Void in
-                println(error)
+                print(error)
         })
     }
     
@@ -58,19 +59,20 @@ class ViewController: UIViewController,linkDelegate {
         Network.sharedInstance.getEpisodePage(fullLink,
             success: { (response) -> Void in
                 //        extract and return div_com_(\\d*)\\D id values
-                let re = NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: nil, error: nil)!
-                let matches = re.matchesInString(response, options: nil, range: NSRange(location: 0, length: count(response.utf16)))
+                let re = try! NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: [])
+                let matches = re.matchesInString(response, options: [], range: NSRange(location: 0, length: response.utf16.count))
                 
-                var done = false
-                for match in matches as! [NSTextCheckingResult] {
+                let done = false
+                for match in matches {
                     if done {
                         break
                     }else{
                         let substring = (response as NSString).substringWithRange(match.rangeAtIndex(1))
+                        print(substring)
                     }
                 }
             }) { (error) -> Void in
-                println(error)
+                print(error)
         }
     }
     
@@ -90,7 +92,7 @@ class ViewController: UIViewController,linkDelegate {
     @IBAction func goButtonPressed(sender: UIButton) {
         //initializing a video streamer creates an object that then contains the embedded video nsurl
         
-        video = videoStreamer(url: textURL.text)
+        video = videoStreamer(url: textURL.text!)
         video?.delegate = self
         self.view.addSubview(video!)
         textURL.resignFirstResponder()
@@ -111,9 +113,9 @@ class ViewController: UIViewController,linkDelegate {
     }
     
     func extractText(myPattern:String,mytext:String)->(String) {
-        let re2 = NSRegularExpression(pattern: myPattern, options: NSRegularExpressionOptions.CaseInsensitive, error: nil)!
-        let matches2 = re2.matchesInString(mytext, options: nil, range: NSRange(location: 0, length: count(mytext.utf16)))
-        for match in matches2 as! [NSTextCheckingResult] {
+        let re2 = try! NSRegularExpression(pattern: myPattern, options: NSRegularExpressionOptions.CaseInsensitive)
+        let matches2 = re2.matchesInString(mytext, options: [], range: NSRange(location: 0, length: mytext.utf16.count))
+        for match in matches2 {
             // range at index 0: full match
             // range at index 1: first capture group
             return (mytext as NSString).substringWithRange(match.rangeAtIndex(1)) as String
@@ -123,9 +125,9 @@ class ViewController: UIViewController,linkDelegate {
     
     func getHostPage(){
         Network.sharedInstance.getHostPage("http://vodlocker.com/82vqdnh0s9ow", success: { (response) -> Void in
-                println("success: \(response)")
+                print("success: \(response)")
             }) { (error) -> Void in
-                println("error: \(error)")
+                print("error: \(error)")
         }
     }
 }
