@@ -62,15 +62,8 @@ class ViewController: UIViewController,linkDelegate {
                 let re = try! NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: [])
                 let matches = re.matchesInString(response, options: [], range: NSRange(location: 0, length: response.utf16.count))
                 
-                let done = false
-                for match in matches {
-                    if done {
-                        break
-                    }else{
-                        let substring = (response as NSString).substringWithRange(match.rangeAtIndex(1))
-                        print(substring)
-                    }
-                }
+                var ids = matches.map({(response as NSString).substringWithRange($0.rangeAtIndex(1))})
+                
             }) { (error) -> Void in
                 print(error)
         }
