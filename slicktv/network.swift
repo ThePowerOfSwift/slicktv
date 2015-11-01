@@ -14,6 +14,46 @@ class Network {
     static let sharedInstance = Network()
     private init() {}
     
+    // Alamofire Request method with PromiseKit
+    func makePromiseRequest(method: Alamofire.Method, url: NSURL) -> Promise<AnyObject> {
+        return Promise { fulfill, reject in
+            Alamofire.request(method, url).responseString { response in
+            if response.result.isSuccess {
+                    let re = try! NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: [])
+                    let res = response.result.value!
+                    let matches = re.matchesInString(res, options: [], range: NSRange(location: 0, length: res.utf16.count))
+                
+                    fulfill(matches.map({(res as NSString).substringWithRange($0.rangeAtIndex(1))}))
+                }else{
+                    reject(response.result.error!)
+                }
+            }
+        }
+    }
+    
+    func makePromiseRequestHostLink(method: Alamofire.Method, id:String) -> Promise<AnyObject> {
+        return Promise { fulfill, reject in
+            var postResponse:String?
+            let tvmuseAJAX:String = "http://www.tvmuse.com/ajax.php"
+            let tvmuseParams:[String : AnyObject] = [
+                "action":"2h",
+                "o_item0":id
+            ]
+
+            Alamofire.request(method, tvmuseAJAX, parameters: tvmuseParams).responseString { response in
+                if response.result.isSuccess {
+                    postResponse = response.result.value
+                    let pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
+                    let hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
+                    
+                    fulfill(hostLink)
+                }else{
+                    reject(response.result.error!)
+                }
+            }
+        }
+    }
+    
     func getEpisodePage(link:String, success:(response:String)->Void,failure:(error:AnyObject)->Void) {
         Alamofire.request(.GET, link)
             .responseString { response in
@@ -39,7 +79,7 @@ class Network {
         }
     }
 
-    func getHostLink(link:String,params: [String: AnyObject], success:(response:String)->Void,failure:(error:AnyObject)->Void) {
+    func getHostLink(link:String,params: [String: AnyObject], success:(response:String)->String,failure:(error:AnyObject)->Void) {
         Alamofire.request(.POST, link, parameters:params)
             .responseString { response in
                 if response.result.isSuccess {
@@ -50,4 +90,14 @@ class Network {
         }
     }
 
+    func extractText(myPattern:String,mytext:String)->(String) {
+        let re2 = try! NSRegularExpression(pattern: myPattern, options: NSRegularExpressionOptions.CaseInsensitive)
+        let matches2 = re2.matchesInString(mytext, options: [], range: NSRange(location: 0, length: mytext.utf16.count))
+        for match in matches2 {
+            // range at index 0: full match
+            // range at index 1: first capture group
+            return (mytext as NSString).substringWithRange(match.rangeAtIndex(1)) as String
+        }
+        return ""
+    }
 }

@@ -18,8 +18,6 @@ class ViewController: UIViewController,linkDelegate {
     var video:videoStreamer?
     var myshow:tvshow?
     var fullSourceLink:String!
-    var sourceDom:String!
-    let tvmuseAJAX:String = "http://www.tvmuse.com/ajax.php"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,44 +27,18 @@ class ViewController: UIViewController,linkDelegate {
         myshow = tvshow(name: textURL.text!, season: 1, episode: 1)
         
         fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
-        VCgetEpisodePage(fullSourceLink)
+
+        Network.sharedInstance.makePromiseRequest(.GET, url: NSURL(string: fullSourceLink)! ).then {  (idArray) -> Promise<AnyObject> in
+                let id = idArray as! [String]
+                return Network.sharedInstance.makePromiseRequestHostLink(.POST, id: id[0])
+        }.then { (vodlockerLink) -> Void in
+            self.textURL.text = vodlockerLink as? String
+//            self.textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
+        }
         
-        textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "movieOrientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
-    }
-
-    func VCgetHostLink(id:String){
-        var postResponse:String?
-        let tvmuseParams:[String : AnyObject] = [
-            "action":"2h",
-            "o_item0":id
-        ]
-        Network.sharedInstance.getHostLink(self.tvmuseAJAX, params: tvmuseParams,
-            success: { (response) -> Void in
-                postResponse = response
-                print(postResponse)
-                let pattern = "(http.*vodlocker\\.com\\/.*?)[^a-zA-Z0-9]"
-                var hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
-            },failure:
-            { (error) -> Void in
-                print(error)
-        })
-    }
-    
-    func VCgetEpisodePage(fullLink:String){
-        //        load fullSourceLink dom
-        Network.sharedInstance.getEpisodePage(fullLink,
-            success: { (response) -> Void in
-                //        extract and return div_com_(\\d*)\\D id values
-                let re = try! NSRegularExpression(pattern: "div_com_(\\d*)\\D", options: [])
-                let matches = re.matchesInString(response, options: [], range: NSRange(location: 0, length: response.utf16.count))
-                
-                var ids = matches.map({(response as NSString).substringWithRange($0.rangeAtIndex(1))})
-                
-            }) { (error) -> Void in
-                print(error)
-        }
     }
     
     func loadVideo(link: NSURL){
