@@ -49,14 +49,26 @@ class ViewController: UIViewController,linkDelegate {
         fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
         
         Network.sharedInstance.makePromiseRequest(.GET, url: NSURL(string: fullSourceLink)! )
-            .then {  (idArray) -> Promise<AnyObject> in
-                let id = idArray as! [String]
-                return Network.sharedInstance.makePromiseRequestHostLink(.POST, id: id[0])
-            }.then { (vodlockerLink) -> Void in
-                self.video = videoStreamer(url: (vodlockerLink as? String)!)
-                self.video?.delegate = self
-                self.view.addSubview(self.video!)
-                self.textURL.resignFirstResponder()
+        .then {  (idArray) -> Promise<AnyObject> in
+            let ids = idArray as! [String]
+//                var value = Network.sharedInstance.makePromiseRequestHostLink(.POST, id: ids[0])
+            var p:Promise<AnyObject>!
+//                need to loop through the ids until a vodlocker link is found
+            for item in ids {
+//                    value = Network.sharedInstance.makePromiseRequestHostLink(.POST, id: item)
+                p = p.then{ _ in
+                    return Network.sharedInstance.makePromiseRequestHostLink(.POST, id: item)
+                }
+            }
+            return Promise { fulfill, reject in
+                let done = "done"
+                fulfill(done)
+            }
+        }.then { (vodlockerLink) -> Void in
+            self.video = videoStreamer(url: (vodlockerLink as? String)!)
+            self.video?.delegate = self
+            self.view.addSubview(self.video!)
+            self.textURL.resignFirstResponder()
         }
     }
     
