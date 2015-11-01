@@ -74,22 +74,4 @@ class ViewController: UIViewController,linkDelegate {
         self.tabBarController?.tabBar.hidden = false
     }
     
-    func extractText(myPattern:String,mytext:String)->(String) {
-        let re2 = try! NSRegularExpression(pattern: myPattern, options: NSRegularExpressionOptions.CaseInsensitive)
-        let matches2 = re2.matchesInString(mytext, options: [], range: NSRange(location: 0, length: mytext.utf16.count))
-        for match in matches2 {
-            // range at index 0: full match
-            // range at index 1: first capture group
-            return (mytext as NSString).substringWithRange(match.rangeAtIndex(1)) as String
-        }
-        return ""
-    }
-    
-    func getHostPage(){
-        Network.sharedInstance.getHostPage("http://vodlocker.com/82vqdnh0s9ow", success: { (response) -> Void in
-                print("success: \(response)")
-            }) { (error) -> Void in
-                print("error: \(error)")
-        }
-    }
 }
