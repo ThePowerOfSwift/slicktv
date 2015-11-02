@@ -44,31 +44,29 @@ class ViewController: UIViewController,linkDelegate {
     @IBAction func goButtonPressed(sender: UIButton) {
         //initializing a video streamer creates an object that then contains the embedded video nsurl
         
-        myshow = tvshow(name: textURL.text!, season: 1, episode: 1)
-        
+        myshow = tvshow(name: textURL.text!, season: 1, episode: 2)
         fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
         
         Network.sharedInstance.makePromiseRequest(.GET, url: NSURL(string: fullSourceLink)! )
-        .then {  (idArray) -> Promise<AnyObject> in
+        .then {  (idArray) -> Void in
             let ids = idArray as! [String]
-//                var value = Network.sharedInstance.makePromiseRequestHostLink(.POST, id: ids[0])
-            var p:Promise<AnyObject>!
-//                need to loop through the ids until a vodlocker link is found
-            for item in ids {
-//                    value = Network.sharedInstance.makePromiseRequestHostLink(.POST, id: item)
-                p = p.then{ _ in
-                    return Network.sharedInstance.makePromiseRequestHostLink(.POST, id: item)
+            when(ids.map({Network.sharedInstance.makePromiseRequestHostLink(.POST, id: $0)})).then{ link -> Promise<String> in
+                return Promise { fulfill, reject in
+                    let stringLink:[String] = link as! [String]
+                    for entry in stringLink {
+                        if entry != "" {
+                            fulfill(entry)
+                            break
+                        }
+                    }
                 }
+            }.then { (vodlockerLink) -> Void in
+                print(vodlockerLink)
+                self.video = videoStreamer(url: vodlockerLink)
+                self.video?.delegate = self
+                self.view.addSubview(self.video!)
+                self.textURL.resignFirstResponder()
             }
-            return Promise { fulfill, reject in
-                let done = "done"
-                fulfill(done)
-            }
-        }.then { (vodlockerLink) -> Void in
-            self.video = videoStreamer(url: (vodlockerLink as? String)!)
-            self.video?.delegate = self
-            self.view.addSubview(self.video!)
-            self.textURL.resignFirstResponder()
         }
     }
     
