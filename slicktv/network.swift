@@ -9,6 +9,7 @@
 import Foundation
 import Alamofire
 import PromiseKit
+import SwiftyJSON
 
 class Network {
     static let sharedInstance = Network()
@@ -47,6 +48,34 @@ class Network {
                     let hostLink:String = self.extractText(pattern, mytext: self.extractText(pattern, mytext: postResponse!))
                     
                     fulfill(hostLink)
+                }else{
+                    reject(response.result.error!)
+                }
+            }
+        }
+    }
+    
+    func makePromiseQueryTVShow(method: Alamofire.Method, url:String) -> Promise<AnyObject> {
+        return Promise { fulfill, reject in
+            let encodedTVShow:String = "http://api.tvmaze.com/singlesearch/shows?q=\((url.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()))!)"
+            
+            Alamofire.request(method, encodedTVShow).responseJSON { response in
+                if response.result.isSuccess {
+                    fulfill(response.result.value!)
+                }else{
+                    reject(response.result.error!)
+                }
+            }
+        }
+    }
+    
+    func makePromiseTVMazeEpisode(method: Alamofire.Method, url:String) -> Promise<JSON> {
+        return Promise { fulfill, reject in
+            let encodedEpisode:String = url
+            
+            Alamofire.request(method, encodedEpisode).responseJSON { response in
+                if response.result.isSuccess {
+                    fulfill(JSON(response.result.value!))
                 }else{
                     reject(response.result.error!)
                 }
@@ -100,4 +129,5 @@ class Network {
         }
         return ""
     }
+
 }

@@ -10,6 +10,7 @@ import UIKit
 import MediaPlayer
 import Alamofire
 import PromiseKit
+import SwiftyJSON
 
 class ViewController: UIViewController,linkDelegate {
 
@@ -19,10 +20,31 @@ class ViewController: UIViewController,linkDelegate {
     var myshow:tvshow?
     var fullSourceLink:String!
 
+    var showName:String!
+    var showSeason:String!
+    var showNumber:String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textURL.text = "Rick-and-Morty_35955"
+        textURL.text = "rick and morty"
+        
+//        need to move this promise chain into button action chain and curl the tvmuse name
+        Network.sharedInstance.makePromiseQueryTVShow(.GET, url: textURL.text!).then{
+            (json) -> Promise<String> in
+            
+            self.showName = JSON(json)["name"].stringValue
+            return Promise { fulfill, reject in
+                fulfill(JSON(json)["_links"]["previousepisode"]["href"].stringValue)
+            }
+        }.then { (alink) -> Promise<JSON> in
+            return Network.sharedInstance.makePromiseTVMazeEpisode(.GET, url: alink)
+        }.then { (json) -> Void in
+            self.showSeason = json["season"].stringValue
+            self.showNumber = json["number"].stringValue
+        }
+        
+//        textURL.text = "Rick-and-Morty_35955"
 //        textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "movieOrientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
@@ -40,11 +62,13 @@ class ViewController: UIViewController,linkDelegate {
         self.view.addSubview(player.view)
         player.play()
     }
+
+//    curl --data "action=5&o_item0=rick%20and%20morty&o_item1=search_atc&o_item2=search_atc_ul" "http://www.tvmuse.com/ajax.php"
     
     @IBAction func goButtonPressed(sender: UIButton) {
-        //initializing a video streamer creates an object that then contains the embedded video nsurl
-        
-        myshow = tvshow(name: textURL.text!, season: 1, episode: 2)
+        self.textURL.resignFirstResponder()
+
+        myshow = tvshow(name: "Rick-and-Morty_35955", season: 1, episode: 2)
         fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
         
         Network.sharedInstance.makePromiseRequest(.GET, url: NSURL(string: fullSourceLink)! )
@@ -65,7 +89,6 @@ class ViewController: UIViewController,linkDelegate {
                 self.video = videoStreamer(url: vodlockerLink)
                 self.video?.delegate = self
                 self.view.addSubview(self.video!)
-                self.textURL.resignFirstResponder()
             }
         }
     }
