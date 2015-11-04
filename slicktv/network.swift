@@ -16,7 +16,7 @@ class Network {
     private init() {}
     
     // Alamofire Request method with PromiseKit
-    func makePromiseRequest(method: Alamofire.Method, url: NSURL) -> Promise<AnyObject> {
+    func makePromiseRequest(method: Alamofire.Method, url: NSURL) -> Promise<[String]> {
         return Promise { fulfill, reject in
             Alamofire.request(method, url).responseString { response in
             if response.result.isSuccess {

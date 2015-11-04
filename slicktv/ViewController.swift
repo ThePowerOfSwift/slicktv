@@ -21,28 +21,12 @@ class ViewController: UIViewController,linkDelegate {
     var fullSourceLink:String!
 
     var showName:String!
-    var showSeason:String!
-    var showNumber:String!
+    var tvmuseName:String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         textURL.text = "rick and morty"
-        
-//        need to move this promise chain into button action chain and curl the tvmuse name
-        Network.sharedInstance.makePromiseQueryTVShow(.GET, url: textURL.text!).then{
-            (json) -> Promise<String> in
-            
-            self.showName = JSON(json)["name"].stringValue
-            return Promise { fulfill, reject in
-                fulfill(JSON(json)["_links"]["previousepisode"]["href"].stringValue)
-            }
-        }.then { (alink) -> Promise<JSON> in
-            return Network.sharedInstance.makePromiseTVMazeEpisode(.GET, url: alink)
-        }.then { (json) -> Void in
-            self.showSeason = json["season"].stringValue
-            self.showNumber = json["number"].stringValue
-        }
         
 //        textURL.text = "Rick-and-Morty_35955"
 //        textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
@@ -67,14 +51,34 @@ class ViewController: UIViewController,linkDelegate {
     
     @IBAction func goButtonPressed(sender: UIButton) {
         self.textURL.resignFirstResponder()
-
-        myshow = tvshow(name: "Rick-and-Morty_35955", season: 1, episode: 2)
-        fullSourceLink = rawLinkSource(show: myshow!,source: "tvmuse").fullLink
         
-        Network.sharedInstance.makePromiseRequest(.GET, url: NSURL(string: fullSourceLink)! )
-        .then {  (idArray) -> Void in
-            let ids = idArray as! [String]
-            when(ids.map({Network.sharedInstance.makePromiseRequestHostLink(.POST, id: $0)})).then{ link -> Promise<String> in
+        Network.sharedInstance.makePromiseQueryTVShow(.GET, url: textURL.text!).then{ (json) -> Promise<String> in
+            
+        self.showName = JSON(json)["name"].stringValue
+        return Promise { fulfill, reject in
+            fulfill(JSON(json)["_links"]["previousepisode"]["href"].stringValue)
+        }
+        }.then { (alink) -> Promise<JSON> in
+            return Network.sharedInstance.makePromiseTVMazeEpisode(.GET, url: alink)
+        }.then { (json) -> Promise<tvshow> in
+            
+            let tvmuseName = "Rick-and-Morty_35955"
+            let showSeason = json["season"].stringValue
+            let showNumber = json["number"].stringValue
+            
+            return Promise { fulfill, reject in
+                fulfill(tvshow(name: tvmuseName, season: showSeason, episode: showNumber))
+            }
+            
+        }.then { (tvshow) -> Promise<[String]> in
+            
+            self.fullSourceLink = rawLinkSource(show: tvshow, source: "tvmuse").fullLink
+            
+            return Network.sharedInstance.makePromiseRequest(.GET, url: NSURL(string: self.fullSourceLink)! )
+        
+        }.then {  (idArray) -> Void in
+
+            when(idArray.map({Network.sharedInstance.makePromiseRequestHostLink(.POST, id: $0)})).then{ link -> Promise<String> in
                 return Promise { fulfill, reject in
                     let stringLink:[String] = link as! [String]
                     for entry in stringLink {
@@ -84,6 +88,7 @@ class ViewController: UIViewController,linkDelegate {
                         }
                     }
                 }
+//                currently, we assume that the first vodlocker link we see is a good link
             }.then { (vodlockerLink) -> Void in
                 print(vodlockerLink)
                 self.video = videoStreamer(url: vodlockerLink)

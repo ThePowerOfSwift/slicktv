@@ -10,6 +10,6 @@ import Foundation
 
 struct tvshow {
     var name:String
-    var season:Int
-    var episode:Int
+    var season:String
+    var episode:String
 }
