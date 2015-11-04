@@ -26,10 +26,8 @@ class ViewController: UIViewController,linkDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textURL.text = "rick and morty"
-        
-//        textURL.text = "Rick-and-Morty_35955"
-//        textURL.text = "http://vodlocker.com/82vqdnh0s9ow"
+        textURL.text = "arrow"
+
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "doneButtonClick:", name: MPMoviePlayerPlaybackDidFinishNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "movieOrientationChanged:", name: UIDeviceOrientationDidChangeNotification, object: nil)
     }
@@ -60,13 +58,11 @@ class ViewController: UIViewController,linkDelegate {
             return Network.sharedInstance.makePromiseTVMazeEpisode(.GET, url: alink)
         }.then { (json) -> Promise<tvshow> in
             
-//            let tvmuseName = "Rick-and-Morty_35955"
             let showSeason = json["season"].stringValue
             let showNumber = json["number"].stringValue
             
             return Promise { fulfill, reject in
                 
-//                let query:String = (self.showName.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()))!
                 let query:String = self.showName
                 Network.sharedInstance.makePromiseRequestTVMuseSearch(.POST, tvmuseParams: ["action":"5","o_item0":query,"o_item1":"search_atc","o_item2":"search_atc_ul"]).then{
                     (name) -> Void in
