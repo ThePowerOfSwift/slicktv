@@ -46,8 +46,6 @@ class ViewController: UIViewController,linkDelegate {
         self.view.addSubview(player.view)
         player.play()
     }
-
-//    curl --data "action=5&o_item0=rick%20and%20morty&o_item1=search_atc&o_item2=search_atc_ul" "http://www.tvmuse.com/ajax.php"
     
     @IBAction func goButtonPressed(sender: UIButton) {
         self.textURL.resignFirstResponder()
@@ -62,12 +60,20 @@ class ViewController: UIViewController,linkDelegate {
             return Network.sharedInstance.makePromiseTVMazeEpisode(.GET, url: alink)
         }.then { (json) -> Promise<tvshow> in
             
-            let tvmuseName = "Rick-and-Morty_35955"
+//            let tvmuseName = "Rick-and-Morty_35955"
             let showSeason = json["season"].stringValue
             let showNumber = json["number"].stringValue
             
             return Promise { fulfill, reject in
-                fulfill(tvshow(name: tvmuseName, season: showSeason, episode: showNumber))
+                
+//                let query:String = (self.showName.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet()))!
+                let query:String = self.showName
+                Network.sharedInstance.makePromiseRequestTVMuseSearch(.POST, tvmuseParams: ["action":"5","o_item0":query,"o_item1":"search_atc","o_item2":"search_atc_ul"]).then{
+                    (name) -> Void in
+                    
+                    let tvmusename:String = name as! String
+                    fulfill(tvshow(name: tvmusename, season: showSeason, episode: showNumber))
+                }
             }
             
         }.then { (tvshow) -> Promise<[String]> in
@@ -78,7 +84,7 @@ class ViewController: UIViewController,linkDelegate {
         
         }.then {  (idArray) -> Void in
 
-            when(idArray.map({Network.sharedInstance.makePromiseRequestHostLink(.POST, id: $0)})).then{ link -> Promise<String> in
+            when(idArray.map({Network.sharedInstance.makePromiseRequestTVMuseAction(.POST, tvmuseParams: ["action":"2h","o_item0":$0])})).then{ link -> Promise<String> in
                 return Promise { fulfill, reject in
                     let stringLink:[String] = link as! [String]
                     for entry in stringLink {

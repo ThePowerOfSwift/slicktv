@@ -32,14 +32,10 @@ class Network {
         }
     }
     
-    func makePromiseRequestHostLink(method: Alamofire.Method, id:String) -> Promise<AnyObject> {
+    func makePromiseRequestTVMuseAction(method: Alamofire.Method, tvmuseParams: [String : AnyObject]) -> Promise<AnyObject> {
         return Promise { fulfill, reject in
             var postResponse:String?
             let tvmuseAJAX:String = "http://www.tvmuse.com/ajax.php"
-            let tvmuseParams:[String : AnyObject] = [
-                "action":"2h",
-                "o_item0":id
-            ]
 
             Alamofire.request(method, tvmuseAJAX, parameters: tvmuseParams).responseString { response in
                 if response.result.isSuccess {
@@ -54,6 +50,26 @@ class Network {
             }
         }
     }
+
+    func makePromiseRequestTVMuseSearch(method: Alamofire.Method, tvmuseParams: [String : AnyObject]) -> Promise<AnyObject> {
+        return Promise { fulfill, reject in
+            var postResponse:String?
+            let tvmuseAJAX:String = "http://www.tvmuse.com/ajax.php"
+            
+            Alamofire.request(method, tvmuseAJAX, parameters: tvmuseParams).responseString { response in
+                if response.result.isSuccess {
+                    postResponse = response.result.value
+                    let pattern = "\\/tv-shows\\/(.*?)\\/"
+                    let showName:String = self.extractText(pattern, mytext: postResponse!)
+    
+                    fulfill(showName)
+                }else{
+                    reject(response.result.error!)
+                }
+            }
+        }
+    }
+
     
     func makePromiseQueryTVShow(method: Alamofire.Method, url:String) -> Promise<AnyObject> {
         return Promise { fulfill, reject in
