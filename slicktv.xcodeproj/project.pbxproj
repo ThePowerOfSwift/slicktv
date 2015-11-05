@@ -55,7 +55,7 @@
 		F68024801BC3C0F100DA21B9 /* host.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = host.swift; sourceTree = "<group>"; };
 		F6BE84081BDC2678007F7C1C /* network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = network.swift; sourceTree = "<group>"; };
 		F6D0116C1BC9ADDD003A0975 /* extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extractor.swift; sourceTree = "<group>"; };
-		F6EC201F1BEB25E80038C742 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		F6EC201F1BEB25E80038C742 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = slicktv/README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +97,7 @@
 		F627F15E1BBB9E2F00273C58 = {
 			isa = PBXGroup;
 			children = (
+				F6EC201F1BEB25E80038C742 /* README.md */,
 				F627F1691BBB9E2F00273C58 /* slicktv */,
 				F627F1821BBB9E2F00273C58 /* slicktvTests */,
 				F627F1681BBB9E2F00273C58 /* Products */,
@@ -138,7 +139,6 @@
 			isa = PBXGroup;
 			children = (
 				F627F16B1BBB9E2F00273C58 /* Info.plist */,
-				F6EC201F1BEB25E80038C742 /* README.md */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
