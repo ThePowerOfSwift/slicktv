@@ -14,9 +14,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let nav1 = UINavigationController()
+        let first = SearchViewController()
+        
+        nav1.viewControllers = [first]
+        nav1.tabBarItem = UITabBarItem(tabBarSystemItem: .Search, tag: 1)
+        
+        let nav2 = UINavigationController()
+        let second = SearchViewController()
+        
+        nav2.viewControllers = [second]
+        nav2.tabBarItem = UITabBarItem(tabBarSystemItem: .Bookmarks, tag: 2)
+        
+        let tabs = UITabBarController()
+        tabs.viewControllers = [nav1, nav2]
+        
+        self.window!.rootViewController = tabs;
+        
+        window?.makeKeyAndVisible()
+        
         return true
     }
 
