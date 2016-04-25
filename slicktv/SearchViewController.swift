@@ -8,90 +8,49 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, searchDelegate {
 
-    var searchBar = UIView()
-    var searchField = UITextField()
-    var searchButton = UIButton()
+    let searchView = SearchView()
     
-    let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-    
-    var resultsList = UITableView()
+    var results = ["Arrow", "The Flash", "Blacklist"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.orangeColor()
         
-//        add search bar to view underneath nav bar
-        searchBar = addSearchBar()
-        view.addSubview(searchBar)
+        searchView.delegate = self
+        searchView.frame = self.view.frame
+        searchView.loadView()
+        self.view.addSubview(searchView)
         
-//        add search field to search bar
-        searchField = addSearchField()
-        searchBar.addSubview(searchField)
-        
-//        add search button to search bar
-        searchButton = addSearchButton()
-        searchBar.addSubview(searchButton)
-        
-//        add table view area for search results
-        resultsList = addResultsList()
-        view.addSubview(resultsList)
-
-//        preload search results with hard coded list of favorites
-    
-    }
-
-    func addSearchBar() -> UIView {
-        let view = UIView()
-        let navBarHeight = (self.navigationController?.navigationBar.frame.height)!
-        view.frame = CGRectMake(0,navBarHeight + statusBarHeight,self.view.frame.width, self.view.frame.height/10)
-        view.backgroundColor = UIColor.brownColor()
-        return view
+        searchView.resultsList.delegate = self
+        searchView.resultsList.dataSource = self
+        searchView.resultsList.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")    
     }
     
-    func addSearchField() -> UITextField {
-        let textField = UITextField()
-        textField.frame = CGRectMake(0, 0, searchBar.frame.width * 4/5, searchBar.frame.height)
-        textField.backgroundColor = UIColor.yellowColor()
-        return textField
+    func searchTapped(searchText: String) {
+        print("search: \(searchText)")
     }
     
-    func addSearchButton() -> UIButton {
-        let button = UIButton()
-        button.frame = CGRectMake(searchField.frame.width, 0, searchBar.frame.width * 1/5, searchBar.frame.height)
-        button.addTarget(self, action: #selector(SearchViewController.searchTapped(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-        button.setTitle("Search", forState: UIControlState.Normal)
-        button.backgroundColor = UIColor.blueColor()
-        return button
+    func getNavBarHeight() -> CGFloat {
+        return (self.navigationController?.navigationBar.frame.height)!
     }
     
-    func searchTapped(sender: UIButton) {
-        print("search: \(searchField.text!)")
-    }
-    
-    func addResultsList() -> UITableView {
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.tableFooterView = UIView()
-        
-        let bottomOfSearchBarY = searchBar.frame.origin.y + searchBar.frame.height
-        
-        tableView.frame = CGRectMake(0, bottomOfSearchBarY, self.view.frame.width, self.view.frame.height - bottomOfSearchBarY - (self.tabBarController?.tabBar.frame.height)!)
-        return tableView
+    func getTabBarHeight() -> CGFloat {
+        return (self.tabBarController?.tabBar.frame.height)!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell:UITableViewCell = searchView.resultsList.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
+        cell.textLabel!.text = results[indexPath.row]
+        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return results.count
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("tapped: \(indexPath.row)")
+        print("tapped on: \(results[indexPath.row])")
     }
     
 }
