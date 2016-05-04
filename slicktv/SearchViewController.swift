@@ -8,14 +8,16 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, searchDelegate {
+class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, searchDelegate, queryDelegate {
 
     let searchView = SearchView()
-    
     var results = ["Arrow", "The Flash", "Blacklist"]
+    let search = searchModel.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        search.delegate = self
         
         searchView.delegate = self
         searchView.frame = self.view.frame
@@ -28,7 +30,18 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func searchTapped(searchText: String) {
-        print("search: \(searchText)")
+        searchModel.sharedInstance.searchForTVShow(searchText)
+    }
+    
+    func searchCompleted(result: Array<String>) {
+        self.results.removeAll()
+        self.results = result
+        
+        if self.results.count == 0 {
+            self.results.append("no results found")
+        }
+        
+        self.searchView.resultsList.reloadData()
     }
     
     func getNavBarHeight() -> CGFloat {

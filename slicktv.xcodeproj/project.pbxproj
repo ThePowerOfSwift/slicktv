@@ -20,6 +20,7 @@
 		F67B2D6D1CCD4D650026B006 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67B2D6C1CCD4D650026B006 /* SearchView.swift */; };
 		F680247D1BC39CEA00DA21B9 /* videoStreamer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */; };
 		F68024811BC3C0F100DA21B9 /* host.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68024801BC3C0F100DA21B9 /* host.swift */; };
+		F68E35FE1CDA888900594B6A /* searchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F68E35FD1CDA888900594B6A /* searchModel.swift */; };
 		F6BE84091BDC2678007F7C1C /* network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE84081BDC2678007F7C1C /* network.swift */; };
 		F6D0116D1BC9ADDD003A0975 /* extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D0116C1BC9ADDD003A0975 /* extractor.swift */; };
 		F6EC20201BEB25E80038C742 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F6EC201F1BEB25E80038C742 /* README.md */; };
@@ -55,6 +56,7 @@
 		F67B2D6C1CCD4D650026B006 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = videoStreamer.swift; sourceTree = "<group>"; };
 		F68024801BC3C0F100DA21B9 /* host.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = host.swift; sourceTree = "<group>"; };
+		F68E35FD1CDA888900594B6A /* searchModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = searchModel.swift; sourceTree = "<group>"; };
 		F6BE84081BDC2678007F7C1C /* network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = network.swift; sourceTree = "<group>"; };
 		F6D0116C1BC9ADDD003A0975 /* extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extractor.swift; sourceTree = "<group>"; };
 		F6EC201F1BEB25E80038C742 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = slicktv/README.md; sourceTree = "<group>"; };
@@ -165,8 +167,9 @@
 		F67B2D6E1CCD4DA60026B006 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				F650E8911CCC55590000B348 /* SearchViewController.swift */,
 				F67B2D6C1CCD4D650026B006 /* SearchView.swift */,
+				F650E8911CCC55590000B348 /* SearchViewController.swift */,
+				F68E35FD1CDA888900594B6A /* searchModel.swift */,
 			);
 			name = Search;
 			sourceTree = "<group>";
@@ -332,6 +335,7 @@
 				F65162AC1BDC0C0B009A38F1 /* tvshow.swift in Sources */,
 				F627F1721BBB9E2F00273C58 /* ViewController.swift in Sources */,
 				F68024811BC3C0F100DA21B9 /* host.swift in Sources */,
+				F68E35FE1CDA888900594B6A /* searchModel.swift in Sources */,
 				F627F1701BBB9E2F00273C58 /* slicktv.xcdatamodeld in Sources */,
 				F627F16D1BBB9E2F00273C58 /* AppDelegate.swift in Sources */,
 				F6BE84091BDC2678007F7C1C /* network.swift in Sources */,
