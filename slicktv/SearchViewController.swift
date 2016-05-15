@@ -7,12 +7,13 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class SearchViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, searchDelegate, queryDelegate {
 
     let searchView = SearchView()
-    var results = ["Arrow", "The Flash", "Blacklist"]
-    let search = searchModel.sharedInstance
+    var results: Array = [JSON]()
+    let search = SearchModel.sharedInstance
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +21,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
         search.delegate = self
         
         searchView.delegate = self
-        searchView.frame = self.view.frame
+        searchView.frame = view.frame
         searchView.loadView()
         self.view.addSubview(searchView)
         
@@ -30,12 +31,14 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func searchTapped(searchText: String) {
-        searchModel.sharedInstance.searchForTVShow(searchText)
+        search.forTVShow(searchText)
     }
     
-    func searchCompleted(result: Array<String>) {
+    func searchCompleted(results: Array<JSON>) {
         self.results.removeAll()
-        self.results = result
+        
+//        how do i do error handling while i do the map function?
+        self.results = results
         
         if self.results.count == 0 {
             self.results.append("no results found")
@@ -54,7 +57,7 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell:UITableViewCell = searchView.resultsList.dequeueReusableCellWithIdentifier("cell")! as UITableViewCell
-        cell.textLabel!.text = results[indexPath.row]
+        cell.textLabel!.text = results[indexPath.row]["name"].string!
         return cell
     }
     
@@ -63,7 +66,13 @@ class SearchViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("tapped on: \(results[indexPath.row])")
+        print("tapped on: \(results[indexPath.row]["id"].int!)")
+        
+//        segue to tv show detail which will include show schedule and actions like bookmark or watch latest episode
+        let vc = ShowViewController()
+        vc.show.showObject = results[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  searchModel.swift
+//  SearchModel.swift
 //  slicktv
 //
 //  Created by Stanley Chiang on 5/4/16.
@@ -12,12 +12,12 @@ import Alamofire
 import SwiftyJSON
 
 protocol queryDelegate {
-    func searchCompleted(result:Array<String>)
+    func searchCompleted(result:Array<JSON>)
 }
 
-class searchModel:NSObject {
+class SearchModel:NSObject {
     
-    static let sharedInstance = searchModel()
+    static let sharedInstance = SearchModel()
     private override init() {}
     
     var delegate:queryDelegate?
@@ -36,14 +36,11 @@ class searchModel:NSObject {
         }
     }
     
-    func searchForTVShow(queryText:String){
-        var parsedArray: Array = [String]()
-        
+    func forTVShow(queryText:String){
+        var parsedArray: Array = [JSON]()
         makePromiseQueryTVShow(queryText).then { (tvMazeSearchResults) -> Void in
             for (_,subJson):(String, JSON) in JSON(tvMazeSearchResults) {
-                if let showName = subJson["show"]["name"].string {
-                    parsedArray.append(showName)
-                }
+                parsedArray.append(subJson["show"])                
             }
             
             self.delegate?.searchCompleted(parsedArray)

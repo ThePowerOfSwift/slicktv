@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nav1.tabBarItem = UITabBarItem(tabBarSystemItem: .Search, tag: 1)
         
         let nav2 = UINavigationController()
-        let second = SearchViewController()
+        let second = ShowViewController()
         
         nav2.viewControllers = [second]
         nav2.tabBarItem = UITabBarItem(tabBarSystemItem: .Bookmarks, tag: 2)
