@@ -27,6 +27,9 @@
 		F6BE84091BDC2678007F7C1C /* network.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6BE84081BDC2678007F7C1C /* network.swift */; };
 		F6D0116D1BC9ADDD003A0975 /* extractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D0116C1BC9ADDD003A0975 /* extractor.swift */; };
 		F6EC20201BEB25E80038C742 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F6EC201F1BEB25E80038C742 /* README.md */; };
+		F6F594D91CFB81C900BB56C5 /* BrowserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F594D81CFB81C900BB56C5 /* BrowserView.swift */; };
+		F6F594DB1CFB81D700BB56C5 /* BrowserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F594DA1CFB81D700BB56C5 /* BrowserViewController.swift */; };
+		F6F594DD1CFB81F300BB56C5 /* BrowserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F594DC1CFB81F300BB56C5 /* BrowserModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +69,9 @@
 		F6BE84081BDC2678007F7C1C /* network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = network.swift; sourceTree = "<group>"; };
 		F6D0116C1BC9ADDD003A0975 /* extractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extractor.swift; sourceTree = "<group>"; };
 		F6EC201F1BEB25E80038C742 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = slicktv/README.md; sourceTree = "<group>"; };
+		F6F594D81CFB81C900BB56C5 /* BrowserView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserView.swift; sourceTree = "<group>"; };
+		F6F594DA1CFB81D700BB56C5 /* BrowserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserViewController.swift; sourceTree = "<group>"; };
+		F6F594DC1CFB81F300BB56C5 /* BrowserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,11 +110,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		F61C56AD1CE8FB9000D40370 /* Service */ = {
+		F61C56AE1CE92FFF00D40370 /* Browser */ = {
 			isa = PBXGroup;
 			children = (
+				F6F594D81CFB81C900BB56C5 /* BrowserView.swift */,
+				F6F594DA1CFB81D700BB56C5 /* BrowserViewController.swift */,
+				F6F594DC1CFB81F300BB56C5 /* BrowserModel.swift */,
 			);
-			name = Service;
+			name = Browser;
 			sourceTree = "<group>";
 		};
 		F627F15E1BBB9E2F00273C58 = {
@@ -137,7 +146,7 @@
 			children = (
 				F67B2D6E1CCD4DA60026B006 /* Search */,
 				F68E36041CDAA54900594B6A /* Show */,
-				F61C56AD1CE8FB9000D40370 /* Service */,
+				F61C56AE1CE92FFF00D40370 /* Browser */,
 				F627F1711BBB9E2F00273C58 /* ViewController.swift */,
 				F680247C1BC39CEA00DA21B9 /* videoStreamer.swift */,
 				F6D0116C1BC9ADDD003A0975 /* extractor.swift */,
@@ -353,12 +362,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				F680247D1BC39CEA00DA21B9 /* videoStreamer.swift in Sources */,
+				F6F594DB1CFB81D700BB56C5 /* BrowserViewController.swift in Sources */,
 				F68E360C1CDAA6D700594B6A /* ShowViewController.swift in Sources */,
 				F650E8921CCC55590000B348 /* SearchViewController.swift in Sources */,
 				F6D0116D1BC9ADDD003A0975 /* extractor.swift in Sources */,
 				F6EC20201BEB25E80038C742 /* README.md in Sources */,
 				F68E360E1CDAA73200594B6A /* ShowView.swift in Sources */,
 				F67B2D6D1CCD4D650026B006 /* SearchView.swift in Sources */,
+				F6F594D91CFB81C900BB56C5 /* BrowserView.swift in Sources */,
+				F6F594DD1CFB81F300BB56C5 /* BrowserModel.swift in Sources */,
 				F65162AC1BDC0C0B009A38F1 /* tvshow.swift in Sources */,
 				F627F1721BBB9E2F00273C58 /* ViewController.swift in Sources */,
 				F68024811BC3C0F100DA21B9 /* host.swift in Sources */,
